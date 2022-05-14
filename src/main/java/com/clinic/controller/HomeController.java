@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 	
-//	@Value("${message}")
-//	private String message;
+	@Value("${message}")
+	private String message;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
