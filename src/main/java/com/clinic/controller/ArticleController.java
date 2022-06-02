@@ -1,7 +1,7 @@
 package com.clinic.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +18,6 @@ import com.clinic.api.request.APIRequest;
 import com.clinic.api.response.APIResponse;
 import com.clinic.constant.StatusCode;
 import com.clinic.entity.Article;
-import com.clinic.entity.MstVaccine;
 import com.clinic.service.ArticleService;
 
 @CrossOrigin
@@ -32,16 +31,19 @@ public class ArticleController extends BaseController {
 	ArticleService articleService;
 	
 	@RequestMapping(value = "/addArticle", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public APIResponse<Map<String, Object>> addMedicine(@RequestBody String input) {
+	public APIResponse<?> addMedicine(@RequestBody String input) {
 		LOG.traceEntry();
-		APIResponse<Map<String, Object>> response = new APIResponse<Map<String, Object>> ();
+		APIResponse < Article > response = new APIResponse < Article > ();
 		StatusCode statusTrx = StatusCode.SUCCESS;
 		String responseMsg = StatusCode.SUCCESS.toString();
 		try{ 
-			APIRequest<Article> req = getRequestArticle(input);
+			APIRequest < Article > req = getRequestArticle(input);
 			LOG.info("REQ::{}", req.toString());
-			Map<String, Object> result = articleService.insertArticle(req.getPayload());
-			response.setPayload(result);
+			boolean result = articleService.insertArticle(req.getPayload());
+			if (result == false) {
+				statusTrx = StatusCode.INVALID;
+				responseMsg = StatusCode.INVALID.toString();
+			}
 		}catch (Exception e){
 			e.printStackTrace();
 			LOG.error("ERR::[{}]:{}", e.getMessage());
@@ -55,13 +57,14 @@ public class ArticleController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/getListArticle", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public APIResponse<Map<String, Object>> getListArticle() {
+	public APIResponse<?> getListArticle() {
 		LOG.traceEntry();
-		APIResponse<Map<String, Object>> response = new APIResponse<Map<String, Object>> ();
+		APIResponse < List<Article> > response = new APIResponse < List<Article> > ();
 		StatusCode statusTrx = StatusCode.SUCCESS;
 		String responseMsg = StatusCode.SUCCESS.toString();
+		List < Article > result = new ArrayList < Article > ();
 		try{
-			Map<String, Object> result = articleService.getListArticle();
+			result = articleService.getListArticle();
 			response.setPayload(result);
 		}catch (Exception e){
 			e.printStackTrace();
@@ -76,15 +79,16 @@ public class ArticleController extends BaseController {
 	}
 
 	@RequestMapping(value = "/getArticle", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public APIResponse<Map<String, Object>> getArticle(@RequestBody String input) {
+	public APIResponse<?> getArticle(@RequestBody String input) {
 		LOG.traceEntry();
-		APIResponse<Map<String, Object>> response = new APIResponse<Map<String, Object>> ();
+		APIResponse < Article > response = new APIResponse < Article > ();
 		StatusCode statusTrx = StatusCode.SUCCESS;
 		String responseMsg = StatusCode.SUCCESS.toString();
+		Article result = new Article ();
 		try{ 
-			APIRequest<Article> req = getRequestArticle(input);
+			APIRequest < Article > req = getRequestArticle(input);
 			LOG.info("REQ::{}", req.toString());
-			Map<String, Object> result = articleService.getArticle(req.getPayload().getId());
+			result = articleService.getArticle(req.getPayload().getId());
 			response.setPayload(result);
 		}catch (Exception e){
 			e.printStackTrace();

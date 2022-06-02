@@ -2,20 +2,21 @@ package com.clinic.entity;
 
 import java.util.Date;
 
-public class Parent {
+public class User {
 
 	private int id;
 	private String username;
 	private String password;
-	private String fullname;
-	private String phoneNo;
 	private String address;
 	private String email;
+	private String phone_no;
+	private String status;
 	private Date lastActivity;
 	private Date createdDtm;
 	private String createdBy;
 	private Date updatedDtm;
 	private String updatedBy;
+	private Child child;
 	
 	public int getId() {
 		return id;
@@ -35,18 +36,6 @@ public class Parent {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFullname() {
-		return fullname;
-	}
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-	public String getPhoneNo() {
-		return phoneNo;
-	}
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
-	}
 	public String getAddress() {
 		return address;
 	}
@@ -58,6 +47,18 @@ public class Parent {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPhone_no() {
+		return phone_no;
+	}
+	public void setPhone_no(String phone_no) {
+		this.phone_no = phone_no;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public Date getLastActivity() {
 		return lastActivity;
@@ -89,5 +90,11 @@ public class Parent {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	
+	public Child getChild() {
+		return child;
+	}
+	public void setChild(Child child) {
+		this.child = child;
+	}
+
 }

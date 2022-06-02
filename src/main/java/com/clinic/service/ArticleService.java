@@ -1,13 +1,12 @@
 package com.clinic.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.clinic.entity.Article;
 
 public interface ArticleService {
-
-	Map<String, Object> getListArticle() throws Exception;
-	Map<String, Object> getArticle(int id) throws Exception;
-	Map<String, Object> insertArticle(Article article) throws Exception;
-	
+	List < Article > getListArticle() throws Exception;
+	Article getArticle(int id) throws Exception;
+	boolean insertArticle(Article article) throws Exception;
 }

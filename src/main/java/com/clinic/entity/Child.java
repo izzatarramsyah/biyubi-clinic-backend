@@ -5,9 +5,9 @@ import java.util.Date;
 public class Child {
 	
 	private int id;
-	private int parentId;
+	private int userId;
 	private String fullname;
-	private Date birthDate;
+	private String birthDate;
 	private String gender;
 	private String notes;
 	private Date createdDtm;
@@ -15,17 +15,17 @@ public class Child {
 	private Date updatedDtm;
 	private String updatedBy;
 	
-	public int getId() {
+	public int getId() { 
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getParentId() {
-		return parentId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getFullname() {
 		return fullname;
@@ -33,10 +33,10 @@ public class Child {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 	public String getGender() {

@@ -1,6 +1,6 @@
 package com.clinic.entity;
 
-import java.util.List;
+import java.util.Date;
 
 public class Article {
 
@@ -11,7 +11,10 @@ public class Article {
 	private int likes;
 	private int dislikes;
 	private int countArticle;
-	private List<ArticleComment> articleComment;
+	private Date createdDtm;
+	private String createdBy;
+	private Date updatedDtm;
+	private String updatedBy;
 	
 	public int getId() {
 		return id;
@@ -49,17 +52,35 @@ public class Article {
 	public void setDislikes(int dislikes) {
 		this.dislikes = dislikes;
 	}
-	public List<ArticleComment> getArticleComment() {
-		return articleComment;
-	}
-	public void setArticleComment(List<ArticleComment> articleComment) {
-		this.articleComment = articleComment;
-	}
 	public int getCountArticle() {
 		return countArticle;
 	}
 	public void setCountArticle(int countArticle) {
 		this.countArticle = countArticle;
+	}
+	public Date getCreatedDtm() {
+		return createdDtm;
+	}
+	public void setCreatedDtm(Date createdDtm) {
+		this.createdDtm = createdDtm;
+	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getUpdatedDtm() {
+		return updatedDtm;
+	}
+	public void setUpdatedDtm(Date updatedDtm) {
+		this.updatedDtm = updatedDtm;
+	}
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 		
 }

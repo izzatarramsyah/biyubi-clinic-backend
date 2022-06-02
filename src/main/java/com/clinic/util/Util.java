@@ -7,21 +7,6 @@ import java.util.Map;
 
 public class Util {
 	
-	public static Map<String, Object> setMapResponse(String message, boolean status){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("message", message);
-		map.put("status", status);
-		return map;
-	}
-	
-	public static Map<String, Object> setMapResponse(String message, boolean status, Object obj){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("message", message);
-		map.put("status", status);
-		map.put("object", obj);
-		return map;
-	}
-	
 	public static String formatDateWithTime(Date date){
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 		return formatDate.format(date);

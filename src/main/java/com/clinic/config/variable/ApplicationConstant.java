@@ -20,5 +20,9 @@ public class ApplicationConstant {
 
     public static final String BEAN_REST_TEMPLATE = "rest-template";
     public static final String BEAN_REST_PROXY_TEMPLATE = "restProxy";
+    
+    public static final String NEW_REG_PARENT = "NEW_REG_PARENT";
+
+    
 
 }

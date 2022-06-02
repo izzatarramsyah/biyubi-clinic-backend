@@ -2,16 +2,15 @@ package com.clinic.entity;
 
 import java.util.Date;
 
-public class MstVaccine {
+public class Vaccine {
 
 	private int id;
+	private int userId;
 	private String vaccineName;
 	private String vaccineType;
 	private String vaccineDose;
 	private String description;
-	private int ttlUnit;
-	private int remainingUnit;
-	private String expiredDate;
+	private Date vaccineDate;
 	private Date createdDtm;
 	private String createdBy;
 	private Date updatedDtm;
@@ -22,6 +21,12 @@ public class MstVaccine {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getVaccineName() {
 		return vaccineName;
@@ -41,29 +46,17 @@ public class MstVaccine {
 	public void setVaccineDose(String vaccineDose) {
 		this.vaccineDose = vaccineDose;
 	}
-	public int getTtlUnit() {
-		return ttlUnit;
-	}
-	public void setTtlUnit(int ttlUnit) {
-		this.ttlUnit = ttlUnit;
-	}
-	public int getRemainingUnit() {
-		return remainingUnit;
-	}
-	public void setRemainingUnit(int remainingUnit) {
-		this.remainingUnit = remainingUnit;
-	}
-	public String getExpiredDate() {
-		return expiredDate;
-	}
-	public void setExpiredDate(String expiredDate) {
-		this.expiredDate = expiredDate;
-	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Date getVaccineDate() {
+		return vaccineDate;
+	}
+	public void setVaccineDate(Date vaccineDate) {
+		this.vaccineDate = vaccineDate;
 	}
 	public Date getCreatedDtm() {
 		return createdDtm;
@@ -89,5 +82,5 @@ public class MstVaccine {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
+	
 }

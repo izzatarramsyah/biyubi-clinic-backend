@@ -6,17 +6,12 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 
 import com.clinic.api.request.APIRequest;
-import com.clinic.entity.Admin;
 import com.clinic.entity.Article;
-import com.clinic.entity.CheckRecord;
+import com.clinic.entity.CheckHealth;
 import com.clinic.entity.Child;
-import com.clinic.entity.HealthRecord;
-import com.clinic.entity.VaccineRecord;
-import com.clinic.entity.MstMedicine;
-import com.clinic.entity.MstTreatment;
-import com.clinic.entity.MstType;
-import com.clinic.entity.MstVaccine;
-import com.clinic.entity.Parent;
+import com.clinic.entity.Notification;
+import com.clinic.entity.User;
+import com.clinic.entity.Vaccine;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,9 +32,21 @@ public class BaseController {
 	     return t;  
 	 }
 	
-	 public APIRequest<Parent> getRequestParentUser(String content) throws Exception {
+	 public APIRequest<User> getRequestUser(String content) throws Exception {
 		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<Parent>>(){}.getType();
+		 Type fooType = new TypeToken<APIRequest<User>>(){}.getType();
+		 return gson.fromJson(content, fooType);
+	 }
+	 
+	 public APIRequest<Vaccine> getRequestVaccine(String content) throws Exception {
+		 Gson gson = new Gson();
+		 Type fooType = new TypeToken<APIRequest<Vaccine>>(){}.getType();
+		 return gson.fromJson(content, fooType);
+	 }
+	 
+	 public APIRequest<CheckHealth> getRequestCheckHealth(String content) throws Exception {
+		 Gson gson = new Gson();
+		 Type fooType = new TypeToken<APIRequest<CheckHealth>>(){}.getType();
 		 return gson.fromJson(content, fooType);
 	 }
 	 
@@ -49,59 +56,16 @@ public class BaseController {
 		 return gson.fromJson(content, fooType);
 	 }
 	 
-	 public APIRequest<VaccineRecord> getRequestChildVaccine(String content) throws Exception {
-		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<VaccineRecord>>(){}.getType();
-		 return gson.fromJson(content, fooType);
-	 }
-	 
-	 public APIRequest<HealthRecord> getRequestChildCheckHealth(String content) throws Exception {
-		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<HealthRecord>>(){}.getType();
-		 return gson.fromJson(content, fooType);
-	 }
-
-	 public APIRequest<MstVaccine> getRequestMstVaccine(String content) throws Exception {
-		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<MstVaccine>>(){}.getType();
-		 return gson.fromJson(content, fooType);
-	 }
-	 
-	 public APIRequest<MstMedicine> getRequestMstMedicines(String content) throws Exception {
-		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<MstMedicine>>(){}.getType();
-		 return gson.fromJson(content, fooType);
-	 }
-	 
-	 public APIRequest<Admin> getRequestAdminUser(String content) throws Exception {
-		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<Admin>>(){}.getType();
-		 return gson.fromJson(content, fooType);
-	 }
-	 
-	 public APIRequest<MstTreatment> getRequestMstTreatments(String content) throws Exception {
-		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<MstTreatment>>(){}.getType();
-		 return gson.fromJson(content, fooType);
-	 }
-	 
 	 public APIRequest<Article> getRequestArticle(String content) throws Exception {
 		 Gson gson = new Gson();
 		 Type fooType = new TypeToken<APIRequest<Article>>(){}.getType();
 		 return gson.fromJson(content, fooType);
 	 }
 	 
-	 public APIRequest<MstType> getRequestMstType(String content) throws Exception {
+	 public APIRequest<Notification> getRequestNotification(String content) throws Exception {
 		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<MstType>>(){}.getType();
+		 Type fooType = new TypeToken<APIRequest<Notification>>(){}.getType();
 		 return gson.fromJson(content, fooType);
 	 }
-
-	 public APIRequest<CheckRecord> getRequestCheckRecord(String content) throws Exception {
-		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<CheckRecord>>(){}.getType();
-		 return gson.fromJson(content, fooType);
-	 }
-	 
 	 
 }

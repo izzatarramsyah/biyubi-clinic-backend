@@ -2,12 +2,14 @@ package com.clinic.entity;
 
 import java.util.Date;
 
-public class MstTreatment {
+public class CheckHealth {
 	
 	private int id;
-	private String treatType;
-	private String treatName;
-	private String category;
+	private int userId;
+	private int weight;
+	private int height;
+	private int headCircumference;
+	private String notes;
 	private Date createdDtm;
 	private String createdBy;
 	private Date updatedDtm;
@@ -19,23 +21,35 @@ public class MstTreatment {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTreatType() {
-		return treatType;
+	public int getUserId() {
+		return userId;
 	}
-	public void setTreatType(String treatType) {
-		this.treatType = treatType;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getTreatName() {
-		return treatName;
+	public int getWeight() {
+		return weight;
 	}
-	public void setTreatName(String treatName) {
-		this.treatName = treatName;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
-	public String getCategory() {
-		return category;
+	public int getHeight() {
+		return height;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	public int getHeadCircumference() {
+		return headCircumference;
+	}
+	public void setHeadCircumference(int headCircumference) {
+		this.headCircumference = headCircumference;
+	}
+	public String getNotes() {
+		return notes;
+	}
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	public Date getCreatedDtm() {
 		return createdDtm;
@@ -61,6 +75,5 @@ public class MstTreatment {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
 
 }

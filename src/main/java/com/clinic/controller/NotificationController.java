@@ -1,5 +1,7 @@
 package com.clinic.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -16,31 +18,31 @@ import com.clinic.api.object.HeaderResponse;
 import com.clinic.api.request.APIRequest;
 import com.clinic.api.response.APIResponse;
 import com.clinic.constant.StatusCode;
-import com.clinic.entity.Child;
-import com.clinic.entity.HealthRecord;
-import com.clinic.entity.VaccineRecord;
-import com.clinic.service.ChildService;
+import com.clinic.entity.Notification;
+import com.clinic.entity.Vaccine;
+import com.clinic.service.NotificationService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/child")
-public class ChildController extends BaseController {
-	
-	private static final Logger LOG = LogManager.getLogger(ChildController.class);
+@RequestMapping("/notif")
+public class NotificationController extends BaseController {
+
+	private static final Logger LOG = LogManager.getLogger(NotificationController.class);
 
 	@Autowired
-	ChildService childService;
+	NotificationService notificationService;
 	
-	@RequestMapping(value = "/getChildByParentId", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public APIResponse<Map<String, Object>> getChildByParentId(@RequestBody String input) {
+	@RequestMapping(value = "/listNofitication", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public APIResponse<?> listNofitication(@RequestBody String input) {
 		LOG.traceEntry();
-		APIResponse<Map<String, Object>> response = new APIResponse<Map<String, Object>> ();
+		APIResponse < List < Notification > > response = new APIResponse < List < Notification > > ();
 		StatusCode statusTrx = StatusCode.SUCCESS;
 		String responseMsg = StatusCode.SUCCESS.toString();
+		List < Notification > result = new ArrayList < Notification > ();
 		try{
-			APIRequest<Child> req = getRequestChild(input);
+			APIRequest<Notification> req = getRequestNotification(input);
 			LOG.info("REQ::{}", req.toString());
-			Map<String, Object> result = childService.getChildByParentID(req.getPayload().getParentId());
+			result = notificationService.getListNotification(req.getPayload().getUserId());
 			response.setPayload(result);
 		}catch (Exception e){
 			e.printStackTrace();
