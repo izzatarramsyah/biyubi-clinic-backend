@@ -6,6 +6,7 @@ public class CheckHealth {
 	
 	private int id;
 	private int userId;
+	private int childId;
 	private int weight;
 	private int height;
 	private int headCircumference;
@@ -26,6 +27,12 @@ public class CheckHealth {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getChildId() {
+		return childId;
+	}
+	public void setChildId(int childId) {
+		this.childId = childId;
 	}
 	public int getWeight() {
 		return weight;

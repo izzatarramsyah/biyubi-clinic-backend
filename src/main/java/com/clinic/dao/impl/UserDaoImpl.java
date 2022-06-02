@@ -24,30 +24,30 @@ public class UserDaoImpl implements UserDao{
 	
 	private static final Logger LOG = LogManager.getLogger(UserDaoImpl.class);
 
-	public static final String INSERT_USER = "INSERT INTO TBL_USER "
+	public static final String INSERT_USER = "INSERT INTO BIYUBIDB.TBL_USER "
 			+ " ( USERNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, CREATED_DTM, CREATED_BY ) "
 			+ " VALUES (?,?,?,?,?,?,?,?) ";
 	 
-	public static final String INSERT_CHILD = "INSERT INTO TBL_CHILD "
+	public static final String INSERT_CHILD = "INSERT INTO BIYUBIDB.TBL_CHILD "
 			+ " ( USER_ID, FULLNAME, BIRTH_DATE, GENDER, NOTES, CREATED_DTM, CREATED_BY )"
 			+ " VALUES (?,?,?,?,?,?,?) ";
 	
 	public static final String GET_USER_BY_USERNAME = "SELECT ID, USERNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
 			+ " CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
-			+ " FROM TBL_USER "
+			+ " FROM BIYUBIDB.TBL_USER "
 			+ " WHERE USERNAME = ? ";
 	
 	public static final String GET_USER_BY_ID = "SELECT ID, USERNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
 			+ " CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
-			+ " FROM TBL_USER "
+			+ " FROM BIYUBIDB.TBL_USER "
 			+ " WHERE ID = ? ";
 	
 	public static final String GET_CHILD_BY_USER_ID = "SELECT ID, USER_ID, FULLNAME, BIRTH_DATE, "
 			+ " GENDER, NOTES, CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
-			+ " FROM TBL_CHILD "
+			+ " FROM BIYUBIDB.TBL_CHILD "
 			+ " WHERE USER_ID = ? ";
 
-	public static final String UPDATE_USER_ACTIVITY = "UPDATE TBL_USER "
+	public static final String UPDATE_USER_ACTIVITY = "UPDATE BIYUBIDB.TBL_USER "
 			+ " SET LAST_ACTIVITY = ?, "
 			+ " LASTUPD_DTM = ? , "
 			+ " LASTUPD_BY = ? "

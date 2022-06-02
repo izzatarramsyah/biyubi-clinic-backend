@@ -6,10 +6,11 @@ public class Vaccine {
 
 	private int id;
 	private int userId;
+	private int childId;
 	private String vaccineName;
 	private String vaccineType;
 	private String vaccineDose;
-	private String description;
+	private String notes;
 	private Date vaccineDate;
 	private Date createdDtm;
 	private String createdBy;
@@ -27,6 +28,12 @@ public class Vaccine {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getChildId() {
+		return childId;
+	}
+	public void setChildId(int childId) {
+		this.childId = childId;
 	}
 	public String getVaccineName() {
 		return vaccineName;
@@ -46,11 +53,11 @@ public class Vaccine {
 	public void setVaccineDose(String vaccineDose) {
 		this.vaccineDose = vaccineDose;
 	}
-	public String getDescription() {
-		return description;
+	public String getNotes() {
+		return notes;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	public Date getVaccineDate() {
 		return vaccineDate;
