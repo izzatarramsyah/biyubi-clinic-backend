@@ -7,7 +7,7 @@ public class Child {
 	private int id;
 	private int userId;
 	private String fullname;
-	private String birthDate;
+	private Date birthDate;
 	private String gender;
 	private String notes;
 	private Date createdDtm;
@@ -33,10 +33,10 @@ public class Child {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 	public String getGender() {

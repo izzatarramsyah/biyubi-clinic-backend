@@ -1,8 +1,6 @@
 package com.clinic.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,31 +16,39 @@ import com.clinic.api.object.HeaderResponse;
 import com.clinic.api.request.APIRequest;
 import com.clinic.api.response.APIResponse;
 import com.clinic.constant.StatusCode;
-import com.clinic.entity.Notification;
-import com.clinic.entity.Vaccine;
-import com.clinic.service.NotificationService;
+import com.clinic.entity.User;
+import com.clinic.entity.VaccineMaster;
+import com.clinic.entity.VaccineRecord;
+import com.clinic.service.VaccineService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/notif")
-public class NotificationController extends BaseController {
+@RequestMapping("/mst")
+public class MasterConfigController extends BaseController {
 
-	private static final Logger LOG = LogManager.getLogger(NotificationController.class);
+	private static final Logger LOG = LogManager.getLogger(MasterConfigController.class);
 
 	@Autowired
-	NotificationService notificationService;
+	VaccineService vaccineService;
 	
-	@RequestMapping(value = "/listNofitication", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public APIResponse<?> listNofitication(@RequestBody String input) {
+	@RequestMapping(value = "/addVaccineMaster", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public APIResponse<?> addVaccineMaster(@RequestBody String input) {
 		LOG.traceEntry();
-		APIResponse < List < Notification > > response = new APIResponse < List < Notification > > ();
+		APIResponse < HashMap<String, Object> > response = new APIResponse < HashMap<String, Object> > ();
+		HashMap < String, Object > result = new HashMap< String, Object > ();
 		StatusCode statusTrx = StatusCode.SUCCESS;
 		String responseMsg = StatusCode.SUCCESS.toString();
-		List < Notification > result = new ArrayList < Notification > ();
 		try{
-			APIRequest<Notification> req = getRequestNotification(input);
+			APIRequest < VaccineMaster > req = getRequestVaccineMaster(input);
 			LOG.info("REQ::{}", req.toString());
-			result = notificationService.getListNotification(req.getPayload().getUserId());
+			Boolean isSaved = vaccineService.addVaccineMaster(req.getPayload());
+			if (isSaved == false) {
+				statusTrx = StatusCode.INVALID;
+				responseMsg = StatusCode.INVALID.toString();
+				result.put("message", "Failed Saved Vacicne Master");
+			} else {
+				result.put("message", "Success Saved Vacicne Master");
+			}
 			response.setPayload(result);
 		}catch (Exception e){
 			e.printStackTrace();

@@ -13,23 +13,21 @@ import org.springframework.stereotype.Repository;
 import com.clinic.config.variable.ApplicationConstant;
 import com.clinic.dao.CheckHealthDao;
 import com.clinic.datamapper.CheckHealthMapper;
-import com.clinic.datamapper.VaccineMapper;
 import com.clinic.entity.CheckHealth;
-import com.clinic.entity.Vaccine;
 
 @Repository
 public class CheckHealthDaoImpl implements CheckHealthDao{
 	
 	private static final Logger LOG = LogManager.getLogger(CheckHealthDaoImpl.class);
 
-	public static final String GET_LIST_CHECK_HEALTH = "SELECT ID, USER_ID, WEIGHT, HEIGHT, HEAD_CIRCUMFERENCE, NOTES, "
+	public static final String GET_LIST_CHECK_HEALTH = "SELECT ID, USER_ID, CHILD_ID, WEIGHT, LENGTH, HEAD_CIRCUMFERENCE, NOTES, "
 			+ "CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
-			+ "FROM TBL_CHECK_RECORD "
+			+ "FROM BIYUBIDB.TBL_CHECK_HEALTH "
 			+ "WHERE USER_ID = ? ";
 	
-	public static final String ADD_CHECK_HEALTH_RECORD = "INSERT INTO TBL_CHECK_RECORD "
-			+ " ( USER_ID, WEIGHT, HEIGHT, HEAD_CIRCUMFERENCE, NOTES, CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY ) "
-			+ " VALUES (?,?,?,?,?,?,?,?,?) ";
+	public static final String ADD_CHECK_HEALTH_RECORD = "INSERT INTO BIYUBIDB.TBL_CHECK_HEALTH "
+			+ " ( USER_ID, CHILD_ID, WEIGHT, LENGTH, HEAD_CIRCUMFERENCE, NOTES, CREATED_DTM, CREATED_BY) "
+			+ " VALUES (?,?,?,?,?,?,?,?) ";
 	
 	
 	@Autowired
@@ -58,9 +56,9 @@ public class CheckHealthDaoImpl implements CheckHealthDao{
 		int result = 0;
 		try{
 			result = jdbcTemplate.update(ADD_CHECK_HEALTH_RECORD,
-					new Object[] { checkHealth.getUserId(), checkHealth.getWeight(), checkHealth.getHeight(), 
-							checkHealth.getHeadCircumference(), checkHealth.getNotes(),
-							checkHealth.getCreatedDtm(), checkHealth.getCreatedBy(), checkHealth.getUpdatedDtm(), checkHealth.getUpdatedBy()});
+					new Object[] { checkHealth.getUserId(), checkHealth.getChildId(), checkHealth.getWeight(), 
+							checkHealth.getLength(), checkHealth.getHeadCircumference(), checkHealth.getNotes(),
+							checkHealth.getCreatedDtm(), checkHealth.getCreatedBy() });
 		}catch (Exception e){
 			LOG.error("ERR :: {}", e.getMessage());
 		}

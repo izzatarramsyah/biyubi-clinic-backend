@@ -10,6 +10,7 @@ import com.clinic.dao.UserDao;
 import com.clinic.entity.Child;
 import com.clinic.entity.User;
 import com.clinic.service.UserService;
+import com.clinic.util.Security;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService{
 	public User getUserByID (int id) throws Exception {
 		User user = userDao.getUserByID(id);
 		if (user != null) {
-			Child child = userDao.getChildByParentID(user.getId());
+			Child child = userDao.getChildByUserID(user.getId());
 			user.setChild(child);
 			return user;
 		}
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService{
 	public User getUserByUsername (String username) throws Exception {
 		User user = userDao.getUserByUsername(username);
 		if (user != null) {
-			Child child = userDao.getChildByParentID(user.getId());
+			Child child = userDao.getChildByUserID(user.getId());
 			user.setChild(child);
 			return user;
 		}
@@ -40,23 +41,22 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User checkValidUser (String username, String password) throws Exception {
+	public boolean checkValidUser (String username, String password) throws Exception {
 		User user = userDao.getUserByUsername(username);
 		if (user != null) {
-			if (user.getPassword().equals(password)) {
-				Child child = userDao.getChildByParentID(user.getId());
-				user.setChild(child);
-				return user;
+			String decryptedPassword = Security.decrypt(user.getPassword());
+			if (decryptedPassword.equals(password)) {
+				return false;
 			} else {
-				return null;
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 	
 	@Override
 	public Child getChildByParentID(int id) throws Exception {
-		return userDao.getChildByParentID(id);
+		return userDao.getChildByUserID(id);
 	}
 	
 	@Override
@@ -66,7 +66,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean userRegistration (User user) throws Exception {
-		user.setStatus("INISIATE");
+		user.setPassword(Security.encrypt(user.getPassword()));
+		user.setStatus("ACTIVE");
 		user.setCreatedDtm(new Date());
 		user.setCreatedBy("SYSTEM");
 		return userDao.insertUser(user);
@@ -77,6 +78,16 @@ public class UserServiceImpl implements UserService{
 		child.setCreatedDtm(new Date());
 		child.setCreatedBy("SYSTEM");
 		return userDao.insertChild(child);
+	}
+
+	@Override
+	public User getUserByEmail(String email) throws Exception {
+		return userDao.getUserByEmail(email);
+	}
+
+	@Override
+	public User getUserByPhoneNo(String phoneno) throws Exception {
+		return userDao.getUserByPhoneNo(phoneno);
 	}
 
 }

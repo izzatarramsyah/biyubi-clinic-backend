@@ -6,7 +6,9 @@ import java.util.Map;
 import com.clinic.entity.Article;
 
 public interface ArticleService {
+	
 	List < Article > getListArticle() throws Exception;
-	Article getArticle(int id) throws Exception;
-	boolean insertArticle(Article article) throws Exception;
+	
+	Article getArticle (int id) throws Exception;
+	
 }

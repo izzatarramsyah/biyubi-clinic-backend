@@ -8,7 +8,7 @@ public class CheckHealth {
 	private int userId;
 	private int childId;
 	private int weight;
-	private int height;
+	private int length;
 	private int headCircumference;
 	private String notes;
 	private Date createdDtm;
@@ -40,11 +40,11 @@ public class CheckHealth {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	public int getHeight() {
-		return height;
+	public int getLength() {
+		return length;
 	}
-	public void setHeight(int height) {
-		this.height = height;
+	public void setLength(int length) {
+		this.length = length;
 	}
 	public int getHeadCircumference() {
 		return headCircumference;

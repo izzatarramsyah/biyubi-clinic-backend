@@ -15,8 +15,7 @@ public class ArticleMapper implements RowMapper<Article> {
 		result.setTitle(rs.getString("TITLE"));
 		result.setImage(rs.getString("IMAGE"));
 		result.setContent(rs.getString("CONTENT"));
-		result.setLikes(rs.getInt("LIKES"));
-		result.setDislikes(rs.getInt("DISLIKES"));
+		result.setStatus(rs.getString("STATUS"));
 		result.setCreatedDtm(rs.getTimestamp("CREATED_DTM"));
 		result.setCreatedBy(rs.getString("CREATED_BY"));
 		result.setUpdatedDtm(rs.getTimestamp("LASTUPD_DTM"));

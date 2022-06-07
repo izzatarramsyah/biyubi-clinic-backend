@@ -1,5 +1,6 @@
 package com.clinic.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class CheckHealthServiceImpl implements CheckHealthService{
 
 	@Override
 	public boolean addCheckHealthRecord(CheckHealth checkHealth) throws Exception {
+		checkHealth.setCreatedDtm(new Date());
+		checkHealth.setCreatedBy("SYSTEM");
 		return checkHealthDao.addCheckHealthRecord(checkHealth);
 	}
 

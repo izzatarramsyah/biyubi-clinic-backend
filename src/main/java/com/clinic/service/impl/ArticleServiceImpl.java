@@ -16,11 +16,6 @@ public class ArticleServiceImpl implements ArticleService{
 	ArticleDao articleDao;
 
 	@Override
-	public boolean insertArticle(Article article) throws Exception {
-		return articleDao.insertArticle(article); 
-	} 
-
-	@Override
 	public List < Article > getListArticle() throws Exception {
 		return articleDao.getListArticle();
 	}

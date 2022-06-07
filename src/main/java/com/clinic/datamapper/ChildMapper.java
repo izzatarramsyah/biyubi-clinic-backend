@@ -12,12 +12,11 @@ import com.clinic.entity.Child;
 public class ChildMapper implements RowMapper<Child> {
 	@Override
 	public Child mapRow(ResultSet rs, int row) throws SQLException {
-	    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");  
 		Child result = new Child();
 		result.setId(rs.getInt("ID"));
 		result.setUserId(rs.getInt("USER_ID"));
 		result.setFullname(rs.getString("FULLNAME"));
-		result.setBirthDate(dateFormat.format(rs.getDate("BIRTH_DATE")));
+		result.setBirthDate(rs.getDate("BIRTH_DATE"));
 		result.setGender(rs.getString("GENDER"));
 		result.setNotes(rs.getString("NOTES"));
 		result.setCreatedDtm(rs.getTimestamp("CREATED_DTM"));

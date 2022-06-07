@@ -9,9 +9,9 @@ import com.clinic.api.request.APIRequest;
 import com.clinic.entity.Article;
 import com.clinic.entity.CheckHealth;
 import com.clinic.entity.Child;
-import com.clinic.entity.Notification;
+import com.clinic.entity.VaccineMaster;
 import com.clinic.entity.User;
-import com.clinic.entity.Vaccine;
+import com.clinic.entity.VaccineRecord;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,9 +38,9 @@ public class BaseController {
 		 return gson.fromJson(content, fooType);
 	 }
 	 
-	 public APIRequest<Vaccine> getRequestVaccine(String content) throws Exception {
+	 public APIRequest < VaccineRecord > getRequestVaccineRecord(String content) throws Exception {
 		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<Vaccine>>(){}.getType();
+		 Type fooType = new TypeToken<APIRequest< VaccineRecord >>(){}.getType();
 		 return gson.fromJson(content, fooType);
 	 }
 	 
@@ -62,9 +62,9 @@ public class BaseController {
 		 return gson.fromJson(content, fooType);
 	 }
 	 
-	 public APIRequest<Notification> getRequestNotification(String content) throws Exception {
+	 public APIRequest < VaccineMaster > getRequestVaccineMaster(String content) throws Exception {
 		 Gson gson = new Gson();
-		 Type fooType = new TypeToken<APIRequest<Notification>>(){}.getType();
+		 Type fooType = new TypeToken<APIRequest< VaccineMaster >>(){}.getType();
 		 return gson.fromJson(content, fooType);
 	 }
 	 

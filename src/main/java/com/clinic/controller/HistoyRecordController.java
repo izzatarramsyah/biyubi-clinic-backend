@@ -1,5 +1,7 @@
 package com.clinic.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -13,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clinic.api.object.HeaderResponse;
+import com.clinic.api.object.VaccineHistory;
 import com.clinic.api.request.APIRequest;
 import com.clinic.api.response.APIResponse;
 import com.clinic.constant.StatusCode;
 import com.clinic.entity.CheckHealth;
-import com.clinic.entity.Vaccine;
+import com.clinic.entity.VaccineMaster;
+import com.clinic.entity.VaccineRecord;
 import com.clinic.service.CheckHealthService;
 import com.clinic.service.VaccineService;
 
@@ -37,17 +41,29 @@ public class HistoyRecordController extends BaseController {
 	@RequestMapping(value = "/listVaccineRecord", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public APIResponse<?> listVaccineRecord(@RequestBody String input) {
 		LOG.traceEntry();
-		APIResponse<Vaccine> response = new APIResponse<Vaccine> ();
+		APIResponse < HashMap<String, Object> > response = new APIResponse < HashMap<String, Object> > ();
+		HashMap < String, Object > result = new HashMap< String, Object > ();
 		StatusCode statusTrx = StatusCode.SUCCESS;
 		String responseMsg = StatusCode.SUCCESS.toString();
 		try{
-			APIRequest<Vaccine> req = getRequestVaccine(input);
+			APIRequest < VaccineRecord > req = getRequestVaccineRecord(input);
 			LOG.info("REQ::{}", req.toString());
-			List < Vaccine > result = vaccineService.getListVaccine(req.getPayload().getUserId());
-			if (result.size() == 0) {
-				statusTrx = StatusCode.INVALID;
-				responseMsg = StatusCode.INVALID.toString();
+			List < VaccineRecord > vaccineRecord = vaccineService.getListVaccine(req.getPayload().getUserId());
+			List < VaccineHistory > listVaccineHistory = new ArrayList < VaccineHistory> ();
+			for (VaccineRecord l : vaccineRecord) {
+				VaccineHistory history = new VaccineHistory ();
+				VaccineMaster mstVaccine = vaccineService.getMstVaccineByCode(l.getVaccineCode());
+				history.setDate(l.getVaccineDate());
+				history.setName(mstVaccine.getName());
+				history.setType(mstVaccine.getType());
+				history.setBatch(l.getBatch());
+				history.setNextVaccineDate(l.getNextVaccineDate());
+				history.setNotes(l.getNotes());
+				history.setExpDate(l.getExpiredDate());
+				listVaccineHistory.add(history);
 			}
+			result.put("Object", listVaccineHistory);
+			response.setPayload(result);
 		}catch (Exception e){
 			e.printStackTrace();
 			LOG.error("ERR::[{}]:{}", e.getMessage());

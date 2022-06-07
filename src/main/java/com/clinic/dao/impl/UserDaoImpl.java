@@ -24,30 +24,40 @@ public class UserDaoImpl implements UserDao{
 	
 	private static final Logger LOG = LogManager.getLogger(UserDaoImpl.class);
 
-	public static final String INSERT_USER = "INSERT INTO BIYUBIDB.TBL_USER "
-			+ " ( USERNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, CREATED_DTM, CREATED_BY ) "
-			+ " VALUES (?,?,?,?,?,?,?,?) ";
+	public static final String INSERT_USER = "INSERT INTO TBL_USER "
+			+ " ( USERNAME, PASSWORD, FULLNAME, ADDRESS, EMAIL, PHONE_NO, STATUS, CREATED_DTM, CREATED_BY ) "
+			+ " VALUES (?,?,?,?,?,?,?,?,?) ";
 	 
-	public static final String INSERT_CHILD = "INSERT INTO BIYUBIDB.TBL_CHILD "
+	public static final String INSERT_CHILD = "INSERT INTO TBL_CHILD "
 			+ " ( USER_ID, FULLNAME, BIRTH_DATE, GENDER, NOTES, CREATED_DTM, CREATED_BY )"
 			+ " VALUES (?,?,?,?,?,?,?) ";
 	
-	public static final String GET_USER_BY_USERNAME = "SELECT ID, USERNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
+	public static final String GET_USER_BY_USERNAME = "SELECT ID, USERNAME, FULLNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
 			+ " CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
-			+ " FROM BIYUBIDB.TBL_USER "
+			+ " FROM TBL_USER "
 			+ " WHERE USERNAME = ? ";
 	
-	public static final String GET_USER_BY_ID = "SELECT ID, USERNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
+	public static final String GET_USER_BY_EMAIL = "SELECT ID, USERNAME, FULLNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
 			+ " CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
-			+ " FROM BIYUBIDB.TBL_USER "
+			+ " FROM TBL_USER "
+			+ " WHERE EMAIL = ? ";
+	
+	public static final String GET_USER_BY_PHONENO = "SELECT ID, USERNAME, FULLNAME, PASSWORD, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
+			+ " CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
+			+ " FROM TBL_USER "
+			+ " WHERE PHONE_NO = ? ";
+	
+	public static final String GET_USER_BY_ID = "SELECT ID, USERNAME, PASSWORD, FULLNAME, ADDRESS, EMAIL, PHONE_NO, STATUS, LAST_ACTIVITY, "
+			+ " CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
+			+ " FROM TBL_USER "
 			+ " WHERE ID = ? ";
 	
 	public static final String GET_CHILD_BY_USER_ID = "SELECT ID, USER_ID, FULLNAME, BIRTH_DATE, "
 			+ " GENDER, NOTES, CREATED_DTM, CREATED_BY, LASTUPD_DTM, LASTUPD_BY "
-			+ " FROM BIYUBIDB.TBL_CHILD "
+			+ " FROM TBL_CHILD "
 			+ " WHERE USER_ID = ? ";
 
-	public static final String UPDATE_USER_ACTIVITY = "UPDATE BIYUBIDB.TBL_USER "
+	public static final String UPDATE_USER_ACTIVITY = "UPDATE TBL_USER "
 			+ " SET LAST_ACTIVITY = ?, "
 			+ " LASTUPD_DTM = ? , "
 			+ " LASTUPD_BY = ? "
@@ -64,8 +74,8 @@ public class UserDaoImpl implements UserDao{
 		int result = 0;
 		try{
 			result = jdbcTemplate.update(INSERT_USER,
-					new Object[] {user.getUsername(), user.getPassword(), user.getAddress(),
-							user.getEmail(), user.getPhone_no(), user.getStatus(), 
+					new Object[] {user.getUsername(), user.getPassword(), user.getFullname(), 
+							user.getAddress(), user.getEmail(), user.getPhone_no(), user.getStatus(), 
 							user.getCreatedDtm(), user.getCreatedBy()});
 		}catch (Exception e){
 			LOG.error("ERR :: {}", e.getMessage());
@@ -81,9 +91,8 @@ public class UserDaoImpl implements UserDao{
 		LOG.debug("SQL::{}", INSERT_CHILD);
 		int result = 0;
 		try{
-			Date birthDate = new SimpleDateFormat("dd-MM-yyyy").parse(child.getBirthDate());  
 			result = jdbcTemplate.update(INSERT_CHILD,
-					new Object[] { child.getUserId(), child.getFullname(), birthDate, child.getGender(),
+					new Object[] { child.getUserId(), child.getFullname(), child.getBirthDate(), child.getGender(),
 							child.getNotes(), child.getCreatedDtm(), child.getCreatedBy() });
 		}catch (Exception e){
 			LOG.error("ERR :: {}", e.getMessage());
@@ -100,6 +109,36 @@ public class UserDaoImpl implements UserDao{
 		List < User > result = new ArrayList < User >();
 		try{
 			result = jdbcTemplate.query(GET_USER_BY_USERNAME, new Object[] { username }, new UserMapper());
+		}catch (Exception e){
+			LOG.error("ERR :: {}", e.getMessage()); 
+		}
+		LOG.debug("RESULT::{}", result);
+		LOG.traceExit();
+		return result.size() > 0 ? result.get(0) : null;
+	}
+	
+	@Override
+	public User getUserByEmail(String email) throws Exception {
+		LOG.traceEntry();
+		LOG.debug("SQL::{}", GET_USER_BY_EMAIL);
+		List < User > result = new ArrayList < User >();
+		try{
+			result = jdbcTemplate.query(GET_USER_BY_EMAIL, new Object[] { email }, new UserMapper());
+		}catch (Exception e){
+			LOG.error("ERR :: {}", e.getMessage()); 
+		}
+		LOG.debug("RESULT::{}", result);
+		LOG.traceExit();
+		return result.size() > 0 ? result.get(0) : null;
+	}
+	
+	@Override
+	public User getUserByPhoneNo(String phoneno) throws Exception {
+		LOG.traceEntry();
+		LOG.debug("SQL::{}", GET_USER_BY_PHONENO);
+		List < User > result = new ArrayList < User >();
+		try{
+			result = jdbcTemplate.query(GET_USER_BY_PHONENO, new Object[] { phoneno }, new UserMapper());
 		}catch (Exception e){
 			LOG.error("ERR :: {}", e.getMessage()); 
 		}
@@ -124,7 +163,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public Child getChildByParentID(int id) throws Exception {
+	public Child getChildByUserID(int id) throws Exception {
 		LOG.traceEntry();
 		LOG.debug("SQL::{}", GET_CHILD_BY_USER_ID);
 		List < Child > result = new ArrayList < Child >();

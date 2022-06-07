@@ -2,16 +2,17 @@ package com.clinic.entity;
 
 import java.util.Date;
 
-public class Vaccine {
+public class VaccineRecord {
 
 	private int id;
 	private int userId;
 	private int childId;
-	private String vaccineName;
-	private String vaccineType;
-	private String vaccineDose;
+	private String vaccineCode;
+	private int batch;
 	private String notes;
+	private Date expiredDate;
 	private Date vaccineDate;
+	private Date nextVaccineDate;
 	private Date createdDtm;
 	private String createdBy;
 	private Date updatedDtm;
@@ -35,23 +36,17 @@ public class Vaccine {
 	public void setChildId(int childId) {
 		this.childId = childId;
 	}
-	public String getVaccineName() {
-		return vaccineName;
+	public String getVaccineCode() {
+		return vaccineCode;
 	}
-	public void setVaccineName(String vaccineName) {
-		this.vaccineName = vaccineName;
+	public void setVaccineCode(String vaccineCode) {
+		this.vaccineCode = vaccineCode;
 	}
-	public String getVaccineType() {
-		return vaccineType;
+	public int getBatch() {
+		return batch;
 	}
-	public void setVaccineType(String vaccineType) {
-		this.vaccineType = vaccineType;
-	}
-	public String getVaccineDose() {
-		return vaccineDose;
-	}
-	public void setVaccineDose(String vaccineDose) {
-		this.vaccineDose = vaccineDose;
+	public void setBatch(int batch) {
+		this.batch = batch;
 	}
 	public String getNotes() {
 		return notes;
@@ -59,11 +54,23 @@ public class Vaccine {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
+	}
 	public Date getVaccineDate() {
 		return vaccineDate;
 	}
 	public void setVaccineDate(Date vaccineDate) {
 		this.vaccineDate = vaccineDate;
+	}
+	public Date getNextVaccineDate() {
+		return nextVaccineDate;
+	}
+	public void setNextVaccineDate(Date nextVaccineDate) {
+		this.nextVaccineDate = nextVaccineDate;
 	}
 	public Date getCreatedDtm() {
 		return createdDtm;
@@ -89,5 +96,5 @@ public class Vaccine {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	
+
 }

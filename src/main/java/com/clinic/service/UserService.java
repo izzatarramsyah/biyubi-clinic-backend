@@ -9,7 +9,8 @@ public interface UserService {
 
 	User getUserByUsername (String username) throws Exception;
 	
-	User checkValidUser (String username, String password) throws Exception;
+	boolean checkValidUser (String username, String password) throws Exception;
+	
 	Child getChildByParentID (int id) throws Exception;
 	
 	boolean updateLastActivity(User user) throws Exception;
@@ -17,5 +18,9 @@ public interface UserService {
 	boolean userRegistration (User user) throws Exception;
 	
 	boolean childRegistration (Child child) throws Exception;
+	
+	User getUserByEmail (String email) throws Exception;
+	
+	User getUserByPhoneNo (String phoneno) throws Exception;
 	
 }

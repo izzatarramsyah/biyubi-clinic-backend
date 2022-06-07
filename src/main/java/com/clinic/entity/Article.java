@@ -8,9 +8,7 @@ public class Article {
 	private String title;
 	private String image;
 	private String content;
-	private int likes;
-	private int dislikes;
-	private int countArticle;
+	private String status;
 	private Date createdDtm;
 	private String createdBy;
 	private Date updatedDtm;
@@ -40,24 +38,6 @@ public class Article {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getLikes() {
-		return likes;
-	}
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
-	public int getDislikes() {
-		return dislikes;
-	}
-	public void setDislikes(int dislikes) {
-		this.dislikes = dislikes;
-	}
-	public int getCountArticle() {
-		return countArticle;
-	}
-	public void setCountArticle(int countArticle) {
-		this.countArticle = countArticle;
-	}
 	public Date getCreatedDtm() {
 		return createdDtm;
 	}
@@ -81,6 +61,12 @@ public class Article {
 	}
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 		
 }
